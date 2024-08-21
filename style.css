@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+p {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+button:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+    box-shadow: 0 15px 20px rgba(255, 107, 107, 0.4);
+    transform: translateY(-7px);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+button i {
+    margin-right: 10px;
+}
+
+.result {
+    margin-top: 40px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #fce38a;
+    transition: opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.result.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+button:hover .fa-hand-rock, 
+button:hover .fa-hand-paper, 
+button:hover .fa-hand-scissors {
+    animation: shake 0.7s ease-in-out;
+}
