@@ -1,34 +1,24 @@
-const score = JSON.parse(localStorage.getItem("score")) || {
+let score = JSON.parse(localStorage.getItem("score")) || {
   wins: 0,
   losses: 0,
   ties: 0,
 };
 
-function computerMove() {
-  let pcMove;
-  let randomNumber = Math.random();
-  if (randomNumber >= 0 && randomNumber < 1 / 3) {
-    pcMove = "Rock";
-  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-    pcMove = "Paper";
-  } else if (randomNumber >= 2 / 3 && randomNumber <= 1) {
-    pcMove = "Scissors";
-  }
-  return pcMove;
-}
-
-function finalwin() {
-  if (score.wins >= 5) {
-    alert("You Won this game");
-  } else {
-    playGame();
-  }
-}
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector(
+    ".js-score"
+  ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+});
 
 function resetScore() {
   score.wins = 0;
   score.losses = 0;
   score.ties = 0;
+  localStorage.setItem("score", JSON.stringify(score));
+
+  document.querySelector(
+    ".js-score"
+  ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
 function playGame(playerMove) {
@@ -51,7 +41,7 @@ function playGame(playerMove) {
     } else if (pcMove === "Scissors") {
       result = "You Lose";
     }
-  } else if (playerMove === "Scissor") {
+  } else if (playerMove === "Scissors") {
     if (pcMove === "Rock") {
       result = "You Lose";
     } else if (pcMove === "Paper") {
@@ -71,6 +61,30 @@ function playGame(playerMove) {
 
   localStorage.setItem("score", JSON.stringify(score));
 
-  alert(`You picked ${playerMove}. Computer picked ${pcMove}. ${result}
-    Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+  document.querySelector(
+    ".js-score"
+  ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+
+  finalwin(score);
+}
+
+function finalwin() {
+  if (score.wins >= 5) {
+    alert("You Won this game");
+  } else {
+    playGame();
+  }
+}
+
+function computerMove() {
+  let pcMove;
+  let randomNumber = Math.random();
+  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+    pcMove = "Rock";
+  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+    pcMove = "Paper";
+  } else if (randomNumber >= 2 / 3 && randomNumber <= 1) {
+    pcMove = "Scissors";
+  }
+  return pcMove;
 }
